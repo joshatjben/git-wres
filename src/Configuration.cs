@@ -122,8 +122,7 @@ namespace me.joshbennett.git_wres.config
 
             log.Info("directory has been initialized by git-wres.");
 
-            Console.WriteLine("Success.");
-            Console.WriteLine("This directory has been initialized by git-wres.");
+            Console.WriteLine("Success. This directory has been initialized by git-wres.");
         }
 
         public static void AddRemoteCRMConnectionToConfig(string name, string url)
@@ -137,11 +136,10 @@ namespace me.joshbennett.git_wres.config
                 return;
             }
 
-            string successMessage = String.Format("Remote connection \"{0}\" added with url \"{1}\".", name, url);
+            string successMessage = String.Format("A Remote connection \"{0}\" has been added with url \"{1}\".", name, url);
             
             log.Info(successMessage);
-            Console.WriteLine("Success");
-            Console.WriteLine(successMessage);
+            Console.WriteLine("Success. " + successMessage);
 
             configFile.Close();
         }

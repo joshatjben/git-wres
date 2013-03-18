@@ -1,5 +1,7 @@
 #git-wres
 
+Custom git command to manage JavaScript web resources in Microsoft CRM 2011.
+
 ##Usage
 
 ```bash
@@ -14,3 +16,10 @@ make some changes to the files
 ```bash
 git wres push dev-default
 ```
+
+## Options
+
+### git wres add
+* -n name of the wres remote connection
+* -s name of the solution to point to
+* the url of the crm including organization name

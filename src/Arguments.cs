@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using CommandLine;
 using CommandLine.Text;
 using log4net;
@@ -11,7 +12,7 @@ namespace me.joshbennett.git_wres.args
 {
     public class Arguments
     {
-
+        
         #region singleton
         
         private static Arguments _instance;
@@ -78,28 +79,46 @@ namespace me.joshbennett.git_wres.args
 
     public class RemoteSubOptions
     {
-        public RemoteSubOptions()
+        // Create a logger for use in this class
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static string _url;
+
+        [ValueOption(0)]
+        public string action { get; set; }
+
+        [ValueOption(1)]
+        public string url
         {
-            AddVerb = new RemoteAddSubOptions { };
+            get
+            {
+                return _url;
+            }
+            set
+            {
+                // Test to make sure that the url is in the form of http(s)://domain/organization/
+                Regex matchUrl = new Regex("^https?://[^/]+/[^/\n$]+/?$", RegexOptions.IgnoreCase);
+                
+                if (!matchUrl.IsMatch(value))
+                {
+                    string errorMessage = "Error: the url must be in the form of http(s)://domain/organization";
+                    Console.WriteLine("Failed");
+                    Console.WriteLine(errorMessage);
+                    log.Error(errorMessage);
+                    Console.ReadKey();
+                    Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
+                }
+
+                _url = value;
+            }
         }
 
-        [VerbOption("add", HelpText = "Add remote crm 2011 connections")]
-        public RemoteAddSubOptions AddVerb { get; set; }
-
-    }
-
-    public class RemoteAddSubOptions
-    {
-        [Option('n', "remote-name")]
+        [Option('n', "remote-name"
+            , MutuallyExclusiveSet="add")]
         public string RemoteName { get; set; }
 
-        [Option('s', "remote-solution")]
+        [Option('s', "remote-solution"
+            , MutuallyExclusiveSet ="add")]
         public string SolutionName { get; set; }
-
-        [HelpOption]
-        public string GetUsage()
-        {
-            return HelpText.AutoBuild(new object { });
-        }
     }
+
 }

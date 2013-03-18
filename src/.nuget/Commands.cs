@@ -28,7 +28,7 @@ namespace me.joshbennett.git_wres
 
         public static void remote(RemoteSubOptions options)
         {
-            Configuration.AddRemoteCRMConnectionToConfig("dev-test", "http://crmdev/");
+            Configuration.AddRemoteCRMConnectionToConfig(options.RemoteName, options.url);
         }
     }
 }
