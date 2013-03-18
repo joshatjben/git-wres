@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,17 @@ namespace me.joshbennett.git_wres.config
     {
         #region private props
 
-        private bool _enableLogging = false;
-        private string _initLogLevel = LogManager.GetRepository().Threshold.DisplayName;
+        private bool _enableLogging;
+        private static string _initLogLevel = LogManager.GetRepository().Threshold.DisplayName;
 
+        private static readonly string DIR_GIT = ".git";
+        private static readonly string DIR_WRES = ".git\\git-wres";
+        private static readonly string FILE_CONFIG = DIR_WRES + "\\config";
+        private static readonly string FILE_SNAPSHOT = DIR_WRES + "\\LAST_SNAPSHOT";
+
+        // Create a logger for use in this class
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                
         #endregion
 
         #region fields
@@ -28,16 +37,16 @@ namespace me.joshbennett.git_wres.config
             }
             set
             {
-                if (value == _enableLogging)
+                if (value)
                 {
-                    return;
+                    ResetLogging();
                 }
-                
+                else
+                {
+                    DisableLogging();
+                }
+
                 _enableLogging = value;
-                
-                if(value){
-                    
-                }
             }
         }
 
@@ -69,8 +78,72 @@ namespace me.joshbennett.git_wres.config
 
         #region writeToConfig
 
-        public static void AddRemoteCRMToConfig(string name, string url)
+        public static void InitializeConfig()
         {
+            
+            // Check to see if 
+            if (
+                Directory.Exists(DIR_GIT)
+                && Directory.Exists(DIR_WRES) 
+                && File.Exists(FILE_CONFIG)
+                && File.Exists(FILE_SNAPSHOT)
+                )
+            {
+                log.Warn("Nothing to do, directory has already been initialized by git-wres.");
+                Console.WriteLine("Nothing to do.");
+                Console.WriteLine("This directory has already been initialized by git-wres.");
+                return;
+            }
+
+            // Check if there is a .git folder in the working directory
+            if (!Directory.Exists(DIR_GIT))
+            {
+                System.Diagnostics.Process.Start("git", "init");
+            }
+
+            // Check that git-wres directory exists
+            if (!Directory.Exists(DIR_WRES))
+            {
+                Directory.CreateDirectory(DIR_WRES);
+            }
+
+            // Check that config file exists
+            if (!File.Exists(FILE_CONFIG))
+            {
+                FileStream file = File.Create(FILE_CONFIG);
+                file.Close();
+            }
+
+            if (!File.Exists(FILE_SNAPSHOT))
+            {
+                FileStream file = File.Create(FILE_SNAPSHOT);
+                file.Close();
+            }
+
+            log.Info("directory has been initialized by git-wres.");
+
+            Console.WriteLine("Success.");
+            Console.WriteLine("This directory has been initialized by git-wres.");
+        }
+
+        public static void AddRemoteCRMConnectionToConfig(string name, string url)
+        {
+            FileStream configFile = File.Open(FILE_CONFIG, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            
+            if (!configFile.CanWrite)
+            {
+                log.Error("Can not write to file " + FILE_CONFIG + ".");
+                Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
+                return;
+            }
+
+            string successMessage = String.Format("Remote connection \"{0}\" added with url \"{1}\".", name, url);
+            
+            log.Info(successMessage);
+            Console.WriteLine("Success");
+            Console.WriteLine(successMessage);
+
+            configFile.Close();
         }
 
         #endregion
@@ -92,6 +165,14 @@ namespace me.joshbennett.git_wres.config
         public static void SetLogging(string level)
         {
             LogManager.GetRepository().Threshold = LogManager.GetRepository().LevelMap[level];
+        }
+
+        /// <summary>
+        /// Reset logging to what appears in the app.config
+        /// </summary>
+        public static void ResetLogging()
+        {
+            SetLogging(_initLogLevel);
         }
 
         /// <summary>

@@ -53,6 +53,7 @@ namespace me.joshbennett.git_wres
                     break;
                 case "remote":
                     log.Info("running remote");
+                    Commands.remote(options.RemoteVerb);
                     break;
                 default:
                     log.Info(String.Format("Default: verb is {0}",invokedVerb));

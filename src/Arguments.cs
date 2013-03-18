@@ -19,7 +19,9 @@ namespace me.joshbennett.git_wres.args
         private Arguments(){
             // Since we create this instance the parser will not overwrite it
             InitVerb = new InitSubOptions { };
-            
+            PushVerb = new PushSubOptions { };
+            PullVerb = new PullSubOptions { };
+            RemoteVerb = new RemoteSubOptions { };
         }
 
         public static Arguments Instance {
@@ -45,10 +47,10 @@ namespace me.joshbennett.git_wres.args
         public PushSubOptions PushVerb { get; set; }
 
         [VerbOption("pull", HelpText = "Pull the most recent changes from crm 2011")]
-        public PushSubOptions PullVerb { get; set; }
+        public PullSubOptions PullVerb { get; set; }
 
         [VerbOption("remote", HelpText = "Manage remote crm 2011 connections")]
-        public PushSubOptions RemoteVerb { get; set; }
+        public RemoteSubOptions RemoteVerb { get; set; }
 
         #endregion
 
@@ -76,6 +78,28 @@ namespace me.joshbennett.git_wres.args
 
     public class RemoteSubOptions
     {
+        public RemoteSubOptions()
+        {
+            AddVerb = new RemoteAddSubOptions { };
+        }
 
+        [VerbOption("add", HelpText = "Add remote crm 2011 connections")]
+        public RemoteAddSubOptions AddVerb { get; set; }
+
+    }
+
+    public class RemoteAddSubOptions
+    {
+        [Option('n', "remote-name")]
+        public string RemoteName { get; set; }
+
+        [Option('s', "remote-solution")]
+        public string SolutionName { get; set; }
+
+        [HelpOption]
+        public string GetUsage()
+        {
+            return HelpText.AutoBuild(new object { });
+        }
     }
 }

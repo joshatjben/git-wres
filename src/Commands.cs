@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using me.joshbennett.git_wres.args;
+using me.joshbennett.git_wres.config;
 
 namespace me.joshbennett.git_wres
 {
@@ -12,33 +13,7 @@ namespace me.joshbennett.git_wres
     {
         public static void init(InitSubOptions options)
         {
-            string dirGit = ".git";
-            string dirWres = ".git\\git-wres";
-            string fileConfig = dirWres + "\\config";
-
-            if ( Directory.Exists(dirGit) && Directory.Exists(dirWres) && File.Exists(fileConfig))
-            {
-                Console.WriteLine("This directory has already been initialized by git-wres.");
-                return;
-            }
-
-            if (!Directory.Exists(dirGit))
-            {
-                System.Diagnostics.Process.Start("git", "init");
-            }
-
-            if (!Directory.Exists(dirWres))
-            {
-                Directory.CreateDirectory(dirWres);
-            }
-
-            if(!File.Exists(fileConfig))
-            {
-                StreamWriter configStream = File.CreateText(".git\\git-wres\\config");
-                configStream.WriteLine("[core]");
-                configStream.WriteLine("\tlogging = false");
-                configStream.Close();
-            }
+            Configuration.InitializeConfig();
 
         }
 
@@ -51,8 +26,9 @@ namespace me.joshbennett.git_wres
    
         }
 
-        public static void remote()
+        public static void remote(RemoteSubOptions options)
         {
+            Configuration.AddRemoteCRMConnectionToConfig("dev-test", "http://crmdev/");
         }
     }
 }
