@@ -17,9 +17,11 @@ make some changes to the files
 git wres push dev-default
 ```
 
-## Options
+## commands
 
-### git wres add
+### add [options] url
+#### options
 * -n name of the wres remote connection
 * -s name of the solution to point to
+#### url
 * the url of the crm including organization name
