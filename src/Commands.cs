@@ -18,7 +18,7 @@ namespace me.joshbennett.git_wres
 
             if ( Directory.Exists(dirGit) && Directory.Exists(dirWres) && File.Exists(fileConfig))
             {
-                Console.Write("This directory has already been initialized by git-wres");
+                Console.WriteLine("This directory has already been initialized by git-wres.");
                 return;
             }
 

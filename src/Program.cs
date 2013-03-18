@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using me.joshbennett.git_wres.args;
+using me.joshbennett.git_wres.config;
 
 namespace me.joshbennett.git_wres
 {
@@ -15,13 +16,18 @@ namespace me.joshbennett.git_wres
 
         public static string invokedVerb;
         public static object invokedVerbInstance;
-        private static Arguments argumnets;
+        
+        private static Arguments options;
+        private static Configuration config; 
 
         static void Main(string[] args)
         {
-            argumnets = Arguments.Instance;
+            config = Configuration.Instance;
+            options = Arguments.Instance;
 
-            if (!CommandLine.Parser.Default.ParseArguments(args, argumnets,
+            ;
+
+            if (!CommandLine.Parser.Default.ParseArguments(args, options,
                 (verb, subOptions) => {
                     // if parsing succeeds the verb name and correct instance
                     // will be passed to onVerbCommand delegate (string,object)
@@ -36,17 +42,17 @@ namespace me.joshbennett.git_wres
             switch (invokedVerb)
             {
                 case "init":
-                    log.Info("Verb is init");
-                    Commands.init(argumnets.InitVerb);
+                    log.Info("Running init");
+                    Commands.init(options.InitVerb);
                     break;
                 case "pull":
-                    log.Info("Verb is pull");
+                    log.Info("running pull");
                     break;
                 case "push":
-                    log.Info("Verb is push");
+                    log.Info("running push");
                     break;
                 case "remote":
-                    log.Info("Verb is remote");
+                    log.Info("running remote");
                     break;
                 default:
                     log.Info(String.Format("Default: verb is {0}",invokedVerb));
