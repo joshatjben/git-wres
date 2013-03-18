@@ -15,10 +15,11 @@ namespace me.joshbennett.git_wres
 
         public static string invokedVerb;
         public static object invokedVerbInstance;
+        private static Arguments argumnets;
 
         static void Main(string[] args)
         {
-            Arguments argumnets = Arguments.Instance;
+            argumnets = Arguments.Instance;
 
             if (!CommandLine.Parser.Default.ParseArguments(args, argumnets,
                 (verb, subOptions) => {
@@ -36,6 +37,7 @@ namespace me.joshbennett.git_wres
             {
                 case "init":
                     log.Info("Verb is init");
+                    Commands.init(argumnets.InitVerb);
                     break;
                 case "pull":
                     log.Info("Verb is pull");
@@ -50,7 +52,9 @@ namespace me.joshbennett.git_wres
                     log.Info(String.Format("Default: verb is {0}",invokedVerb));
                     break;
             }
-            
+
+            Console.WriteLine("Press enter to continue....");
+            Console.ReadKey();
         }
     }
 }

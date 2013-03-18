@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
 using CommandLine.Text;
+using log4net;
 
 namespace me.joshbennett.git_wres.args
 {
@@ -18,6 +19,7 @@ namespace me.joshbennett.git_wres.args
         private Arguments(){
             // Since we create this instance the parser will not overwrite it
             InitVerb = new InitSubOptions { };
+            
         }
 
         public static Arguments Instance {
@@ -39,20 +41,21 @@ namespace me.joshbennett.git_wres.args
         [VerbOption("init", HelpText = "initalize the repository.")]
         public InitSubOptions InitVerb { get; set; }
 
-        [VerbOption("push", HelpText = "Update remote refs along with associated objects.")]
-        public PushSubOptions AddVerb { get; set; }
+        [VerbOption("push", HelpText = "Push the changes to crm 2011")]
+        public PushSubOptions PushVerb { get; set; }
+
+        [VerbOption("pull", HelpText = "Pull the most recent changes from crm 2011")]
+        public PushSubOptions PullVerb { get; set; }
+
+        [VerbOption("remote", HelpText = "Manage remote crm 2011 connections")]
+        public PushSubOptions RemoteVerb { get; set; }
 
         #endregion
 
         [HelpOption]
         public string GetUsage()
         {
-            // this without using CommandLine.Text
-            //  or using HelpText.AutoBuild
-            var usage = new StringBuilder();
-            usage.AppendLine("Quickstart Application 1.0");
-            usage.AppendLine("Read user manual for usage instructions...");
-            return usage.ToString();
+            return HelpText.AutoBuild(new object { });
         }
     }
 
@@ -61,13 +64,18 @@ namespace me.joshbennett.git_wres.args
         
     }
 
-    class PushSubOptions
+    public class PushSubOptions
     {
         
     }
 
-    class PullSubOptions
+    public class PullSubOptions
     {
-        // Remainder omitted 
+        
+    }
+
+    public class RemoteSubOptions
+    {
+
     }
 }

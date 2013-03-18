@@ -10,24 +10,48 @@ namespace me.joshbennett.git_wres
 {
     public class Commands
     {
-        void init(InitSubOptions options)
+        public static void init(InitSubOptions options)
         {
-            if (Directory.Exists(".git"))
+            string dirGit = ".git";
+            string dirWres = ".git\\git-wres";
+            string fileConfig = dirWres + "\\config";
+
+            if ( Directory.Exists(dirGit) && Directory.Exists(dirWres) && File.Exists(fileConfig))
             {
-                Console.WriteLine("Initializing in ");
+                Console.Write("This directory has already been initialized by git-wres");
+                return;
             }
+
+            if (!Directory.Exists(dirGit))
+            {
+                System.Diagnostics.Process.Start("git", "init");
+            }
+
+            if (!Directory.Exists(dirWres))
+            {
+                Directory.CreateDirectory(dirWres);
+            }
+
+            if(!File.Exists(fileConfig))
+            {
+                StreamWriter configStream = File.CreateText(".git\\git-wres\\config");
+                configStream.WriteLine("[core]");
+                configStream.WriteLine("\tlogging = false");
+                configStream.Close();
+            }
+
         }
 
-        void push()
+        public static void push()
         {
         }
 
-        void pull()
+        public static void pull()
         {
    
         }
 
-        void remote()
+        public static void remote()
         {
         }
     }
