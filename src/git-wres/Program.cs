@@ -25,7 +25,11 @@ namespace me.joshbennett.git_wres
             config = Configuration.Instance;
             options = Arguments.Instance;
 
-            ;
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Nothing to do. Please specify some arguments");
+                return;
+            }
 
             if (!CommandLine.Parser.Default.ParseArguments(args, options,
                 (verb, subOptions) => {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "git-wres", "git-wres.csproj", "{A4539AAB-0689-4338-A246-D4B43C77CCAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "git-wres", ".\git-wres\git-wres.csproj", "{A4539AAB-0689-4338-A246-D4B43C77CCAF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{04481A2E-5F3F-4F9E-BF83-0D10AF2588B7}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,16 +10,40 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{04481A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGit-wres", "TestGit-wres\TestGit-wres.csproj", "{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Release|x64.ActiveCfg = Release|Any CPU
+		{A4539AAB-0689-4338-A246-D4B43C77CCAF}.Release|x86.ActiveCfg = Release|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Release|ARM.ActiveCfg = Release|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Release|x64.ActiveCfg = Release|Any CPU
+		{582CAA1E-8BCD-4E5A-B58E-9F20EB0EF344}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
