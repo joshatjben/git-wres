@@ -146,6 +146,16 @@ namespace me.joshbennett.git_wres.config
 
         #endregion
 
+        #region read from config
+
+        /*public static Remotes[] ReadRemoteConnectionsFromConfig()
+        {
+            //FileStream configFile = File.Open(FILE_CONFIG
+            return new Remotes[1];
+        }*/
+
+        #endregion
+
         #region logging config functions
 
         /// <summary>
