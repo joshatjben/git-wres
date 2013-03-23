@@ -2,7 +2,7 @@
 
 __Development had just stared.  This is still a work in progress!__
 
-Custom git command to manage JavaScript web resources in Microsoft CRM 2011.
+Custom git command to manage web resources in Microsoft CRM 2011.
 
 ##Usage
 
