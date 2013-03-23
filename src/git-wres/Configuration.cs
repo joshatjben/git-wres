@@ -152,11 +152,18 @@ namespace GitWres
 
         #region read from config
 
-        /*public static Remotes[] ReadRemoteConnectionsFromConfig()
+        public static Config ReadConfig()
+        {
+            Config c = new Config();
+
+            return c;
+        }
+
+        public static Remote[] ReadRemoteConnectionsFromConfig()
         {
             //FileStream configFile = File.Open(FILE_CONFIG
-            return new Remotes[1];
-        }*/
+            return new Remote[1];
+        }
 
         #endregion
 
@@ -199,10 +206,15 @@ namespace GitWres
         #endregion
     }
 
-    public class Remotes
+    public class Remote
     {
         public string Name{get; set;}
         public string Url { get; set; }
+    }
+
+    public class Config
+    {
+        public Remote[] RemoteConnections{get; set;}
     }
 
 }

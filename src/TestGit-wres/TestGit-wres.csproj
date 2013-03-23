@@ -70,6 +70,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet.Core">
+      <HintPath>..\packages\YamlDotNet.Core.1.2.1\lib\YamlDotNet.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
