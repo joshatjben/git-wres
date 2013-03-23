@@ -16,16 +16,20 @@ namespace GitWres
 
         private bool _enableLogging;
         private static string _initLogLevel = LogManager.GetRepository().Threshold.DisplayName;
-
-        private static readonly string DIR_GIT = ".git";
-        private static readonly string DIR_WRES = ".git\\git-wres";
-        private static readonly string FILE_CONFIG = DIR_WRES + "\\config";
-        private static readonly string FILE_SNAPSHOT = DIR_WRES + "\\LAST_SNAPSHOT";
-
         // Create a logger for use in this class
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-                
+
         #endregion
+
+        #region public const
+        
+        public static readonly string DIR_GIT = ".git";
+        public static readonly string DIR_WRES = ".git\\git-wres";
+        public static readonly string FILE_CONFIG = DIR_WRES + "\\config";
+        public static readonly string FILE_SNAPSHOT = DIR_WRES + "\\LAST_SNAPSHOT";
+
+        #endregion
+
 
         #region fields
 
