@@ -90,7 +90,7 @@ namespace GitWres
         /// <summary>
         /// Initialize the configuration files
         /// </summary>
-        public static void InitializeConfig()
+        public void InitializeConfig()
         {
             
             // Check to see if 
@@ -142,32 +142,43 @@ namespace GitWres
         /// </summary>
         /// <param name="name">Name of the connection</param>
         /// <param name="url">http(s)://domain/organization</param>
-        public static void AddRemoteCRMConnectionToConfig(string name, string url)
+        public void AddRemoteCRMConnectionToConfig(string name, string url)
         {
-            FileStream configFile = File.Open(FILE_CONFIG, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            
-            if (!configFile.CanWrite)
-            {
-                log.Error("Can not write to file " + FILE_CONFIG + ".");
-                Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
-                return;
-            }
+            Remote crmRemote = new Remote{
+                Name = name,
+                Url = url
+            };
 
-            string successMessage = String.Format("A Remote connection \"{0}\" has been added with url \"{1}\".", name, url);
-            
-            log.Info(successMessage);
-            Console.WriteLine("Success. " + successMessage);
+            List<Remote> remoteList = Config.RemoteConnections.ToList();
+            remoteList.Add(crmRemote);
 
-            configFile.Close();
+            Config.RemoteConnections = remoteList.ToArray();
+
+            WriteToConfigSettingsToFile();
+        }
+
+        /// <summary>
+        /// Write the config object to the config file
+        /// </summary>
+        public void WriteToConfigSettingsToFile()
+        {
+            StreamWriter configFile = new StreamWriter(FILE_CONFIG, false);
+
+            Serializer s = new Serializer();
+            s.Serialize(configFile, Config);
         }
 
         #endregion
 
         #region read from config
 
-        public static ConfigSettings ReadConfig()
+        public void ReadConfig()
         {
-            ConfigSettings c = new ConfigSettings();
+            if (!File.Exists(FILE_CONFIG))
+            {
+                Config = new ConfigSettings();
+                return;
+            }
 
             StreamReader input = new StreamReader(FILE_CONFIG);
             
@@ -175,12 +186,15 @@ namespace GitWres
             YamlStream yaml = new YamlStream();
             yaml.Load(input);
 
-            return c;
+            // Examine the stream
+            YamlMappingNode mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+
+            // TODO put config into object
         }
 
         public static Remote[] ReadRemoteConnectionsFromConfig()
         {
-            
             return new Remote[1];
         }
 
@@ -219,7 +233,7 @@ namespace GitWres
         /// <returns></returns>
         private static bool IsLoggingEnabledByDefault()
         {
-            return ConfigurationManager.AppSettings["enableLogging"].ToLower() == "true";
+            return ConfigurationManager.AppSettings["enableLogging"] != null ? ConfigurationManager.AppSettings["enableLogging"].ToLower() == "true" : false;
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace GitWres
     {
         public static void init(InitSubOptions options)
         {
-            Configuration.InitializeConfig();
+            Configuration.Instance.InitializeConfig();
 
         }
 
@@ -26,7 +26,7 @@ namespace GitWres
 
         public static void remote(RemoteSubOptions options)
         {
-            Configuration.AddRemoteCRMConnectionToConfig(options.RemoteName, options.url);
+            //Configuration.AddRemoteCRMConnectionToConfig(options.RemoteName, options.url);
         }
     }
 }
