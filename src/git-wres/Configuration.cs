@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using log4net;
 using System.Xml;
 
-namespace me.joshbennett.git_wres.config
+namespace GitWres
 {
     public class Configuration
     {

@@ -8,7 +8,7 @@ using CommandLine;
 using CommandLine.Text;
 using log4net;
 
-namespace me.joshbennett.git_wres.args
+namespace GitWres
 {
     public class Arguments
     {

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
-using me.joshbennett.git_wres.args;
-using me.joshbennett.git_wres.config;
 
-namespace me.joshbennett.git_wres
+namespace GitWres
 {
     class Program
     {
