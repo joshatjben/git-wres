@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using System.Xml;
+using YamlDotNet.RepresentationModel;
+using YamlDotNet.RepresentationModel.Serialization;
+
 
 namespace GitWres
 {
@@ -30,7 +34,6 @@ namespace GitWres
 
         #endregion
 
-
         #region fields
 
         public bool EnalbeLogging
@@ -53,6 +56,8 @@ namespace GitWres
                 _enableLogging = value;
             }
         }
+
+        public ConfigSettings Config{get; set;}
 
         #endregion
 
@@ -82,6 +87,9 @@ namespace GitWres
 
         #region writeToConfig
 
+        /// <summary>
+        /// Initialize the configuration files
+        /// </summary>
         public static void InitializeConfig()
         {
             
@@ -129,6 +137,11 @@ namespace GitWres
             Console.WriteLine("Success. This directory has been initialized by git-wres.");
         }
 
+        /// <summary>
+        /// Add a remote CRM connection to the configuration file
+        /// </summary>
+        /// <param name="name">Name of the connection</param>
+        /// <param name="url">http(s)://domain/organization</param>
         public static void AddRemoteCRMConnectionToConfig(string name, string url)
         {
             FileStream configFile = File.Open(FILE_CONFIG, FileMode.OpenOrCreate, FileAccess.ReadWrite);
@@ -152,16 +165,22 @@ namespace GitWres
 
         #region read from config
 
-        public static Config ReadConfig()
+        public static ConfigSettings ReadConfig()
         {
-            Config c = new Config();
+            ConfigSettings c = new ConfigSettings();
+
+            StreamReader input = new StreamReader(FILE_CONFIG);
+            
+            // Load the stream
+            YamlStream yaml = new YamlStream();
+            yaml.Load(input);
 
             return c;
         }
 
         public static Remote[] ReadRemoteConnectionsFromConfig()
         {
-            //FileStream configFile = File.Open(FILE_CONFIG
+            
             return new Remote[1];
         }
 
@@ -212,7 +231,7 @@ namespace GitWres
         public string Url { get; set; }
     }
 
-    public class Config
+    public class ConfigSettings
     {
         public Remote[] RemoteConnections{get; set;}
     }

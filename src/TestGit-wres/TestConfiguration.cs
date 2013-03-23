@@ -21,8 +21,17 @@ namespace TestGit_wres
 
             // Initialize directory
             Configuration.InitializeConfig();
-            
-            
+
+            //Make sure both the config and snapshot files have been created
+            Assert.IsTrue(File.Exists(Configuration.FILE_CONFIG));
+            Assert.IsTrue(File.Exists(Configuration.FILE_SNAPSHOT));
+        }
+
+        [TestMethod]
+        public void TestAddRemoteCRMConnectionToConfig()
+        {
+            Configuration.AddRemoteCRMConnectionToConfig("test1", "http://crmdev/");
+
         }
     }
 }
