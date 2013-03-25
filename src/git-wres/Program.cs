@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
+using GitWres.args;
+using GitWres.cmds;
+using GitWres.config;
 
 namespace GitWres
 {

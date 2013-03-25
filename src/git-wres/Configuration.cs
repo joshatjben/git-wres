@@ -10,9 +10,9 @@ using log4net;
 using System.Xml;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.RepresentationModel.Serialization;
+using GitWres.args;
 
-
-namespace GitWres
+namespace GitWres.config
 {
     public class Configuration
     {

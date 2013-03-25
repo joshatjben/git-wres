@@ -8,8 +8,12 @@ using CommandLine;
 using CommandLine.Text;
 using log4net;
 
-namespace GitWres
+
+namespace GitWres.args
 {
+    /// <summary>
+    /// These classes represent the command line options passed to the program.
+    /// </summary>
     public class Arguments
     {
         
@@ -62,21 +66,33 @@ namespace GitWres
         }
     }
 
+    /// <summary>
+    /// This class represents a CommandLine verb for "init"
+    /// </summary>
     public class InitSubOptions
     {
         
     }
 
+    /// <summary>
+    /// This class represents a CommandLine verb for "push"
+    /// </summary>
     public class PushSubOptions
     {
         
     }
 
+    /// <summary>
+    /// This class represents a CommandLine verb for "pull"
+    /// </summary>
     public class PullSubOptions
     {
         
     }
 
+    /// <summary>
+    /// This class represents a CommandLine verb for "remote"
+    /// </summary>
     public class RemoteSubOptions
     {
         // Create a logger for use in this class

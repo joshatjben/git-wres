@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GitWres.args;
+using GitWres.config;
 
-namespace GitWres
+namespace GitWres.cmds
 {
     public class Commands
     {
